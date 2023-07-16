@@ -43,6 +43,7 @@ boolean configReadMQTT(){
         strlcpy(idMqtt, jsonConfig["idMqtt"] | "", sizeof(idMqtt));
         timeMQTT = jsonConfig["timeMQTT"] | 600000;
         MQTT = jsonConfig["MQTT"] | true;
+        Serial.println (MQTT);
         file.close();
         log(F("\nInfo: Lectura de configuración MQTT correcta"));
         return true;

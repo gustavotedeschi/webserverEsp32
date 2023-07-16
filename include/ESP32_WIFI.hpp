@@ -37,7 +37,7 @@ void configWiFi(){
         digitalWrite(WIFILED, HIGH);
     }else{
         log(F("\nError: WiFi no conectado"));
-        digitalWrite(MQTTLED, LOW);
+        //digitalWrite(MQTTLED, LOW);
     }
 }
 

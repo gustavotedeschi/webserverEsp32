@@ -45,27 +45,45 @@ String deviceID(){
 /**********************************************/
 /*  Configurar los Pines de Salida */
 void configPines(){
-    pinMode(RELAY1, OUTPUT);              
+                
     pinMode(WIFILED, OUTPUT);                  
-    pinMode(MQTTLED, OUTPUT);          
-    pinMode(2,OUTPUT); 
-    digitalWrite(MQTTLED, LOW);
+    //pinMode(MQTTLED, OUTPUT);          
+    //pinMode(2,OUTPUT); 
+    //digitalWrite(MQTTLED, LOW);
     digitalWrite(WIFILED, LOW);
-    digitalWrite(RELAY1, LOW);
+ 
 }
 /**********************************************/
 /*  Parpadeo de los LEDs */
 void led(){
     for(int i=0; i < 4; i++) {
-        digitalWrite(MQTTLED, HIGH);
+        //digitalWrite(MQTTLED, HIGH);
         digitalWrite(WIFILED, HIGH);
         delay(100);
-        digitalWrite(MQTTLED, LOW);
+        //digitalWrite(MQTTLED, LOW);
         digitalWrite(WIFILED, LOW);
-        delay(100);
+        //delay(100);
     }
 }
 /**********************************************/
+
+void CalculoRO()
+  {
+    C_Gas=0;
+    Serial.print("Calculando RO:");
+    for (int i=0;i<300;i++)
+      { C_Gas=C_Gas + analogRead(PuertoGas);
+        delay(10);
+      }
+      C_Gas=C_Gas/300;
+      C_Gas=3.11*(C_Gas/4095);
+      Serial.println("Gas-Volt:");
+      Serial.println(C_Gas); 
+      //C_Gas=(3.3-C_Gas)/C_Gas
+      RO=RL*(5-C_Gas)/C_Gas;  //Reemplazo 3.3 por 5
+      RO=RO/9.8;
+      Serial.println(RO);
+  }
 
 
 

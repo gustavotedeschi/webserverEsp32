@@ -166,7 +166,7 @@ Thanks to Philip Thrasher for the jquery plugin boilerplate for coffee script
       lineCap: 'round',
       size: 150,
       lineWidth: 3,
-      animate: false,
+      //animate: false,
       onStart: $.noop,
       onStop: $.noop
     };

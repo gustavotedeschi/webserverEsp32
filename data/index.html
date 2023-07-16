@@ -21,7 +21,8 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container-fluid">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span>
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span
+                        class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
@@ -29,7 +30,8 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav pull-right">
                         <li class="dropdown">
-                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i> Admin <i class="caret"></i>
+                            <a href="#" role="button" class="dropdown-toggle" data-toggle="dropdown"> <i
+                                    class="icon-user"></i> Admin <i class="caret"></i>
 
                             </a>
                             <ul class="dropdown-menu">
@@ -53,23 +55,24 @@
                         <a href="/"><i class="icon-chevron-right"></i><i class="icon-home pull-left"></i> Dashboard</a>
                     </li>
                     <li class="">
-                        <a href="configwifi"><i class="icon-chevron-right"></i><i class="icon-signal pull-left"></i> Wifi</a>
+                        <a href="configwifi"><i class="icon-chevron-right"></i><i class="icon-signal pull-left"></i>
+                            Wifi</a>
                     </li>
                     <li class="">
-                        <a href="configmqtt"><i class="icon-chevron-right"></i><i class="icon-th pull-left"></i> MQTT</a>
-                    </li>
-                    <li class="" onclick="prenderled2()">
-                        <a href="#"> <i class="icon-chevron-right"></i><i class="icon-th pull-left"></i> LedOn </a>
-                    </li>
-                    <li class="" onclick="apagarled2()">
-                        <a href="#"> <i class="icon-chevron-right"></i><i class="icon-th pull-left"></i> LedOff </a>
-                    </li>
-           
-                    <li class="">
-                        <a href="#" onclick="restablecer()"><i class="icon-arrow-down pull-left"></i><i class="icon-chevron-right"></i> Restablecer</a>
+                        <a href="configmqtt"><i class="icon-chevron-right"></i><i class="icon-th pull-left"></i>
+                            MQTT</a>
                     </li>
                     <li class="">
-                        <a href="#"><i class="icon-chevron-right"></i><i class="icon-refresh pull-left"></i> Reiniciar</a>
+                        <a href="Historicos"><i class="icon-chevron-right"></i><i class="icon-th pull-left"></i>
+                            Historicos</a>
+                    </li>
+                    <li class="">
+                        <a href="#" onclick="restablecer()"><i class="icon-arrow-down pull-left"></i><i
+                                class="icon-chevron-right"></i> Restablecer</a>
+                    </li>
+                    <li class="">
+                        <a href="#"><i class="icon-chevron-right"></i><i class="icon-refresh pull-left"></i>
+                            Reiniciar</a>
                     </li>
                 </ul>
             </div>
@@ -79,8 +82,10 @@
                     <div class="navbar">
                         <div class="navbar-inner">
                             <ul class="breadcrumb">
-                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar" rel='tooltip'>&nbsp;</a></i>
-                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#' title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-left hide-sidebar"><a href='#' title="Hide Sidebar"
+                                        rel='tooltip'>&nbsp;</a></i>
+                                <i class="icon-chevron-right show-sidebar" style="display:none;"><a href='#'
+                                        title="Show Sidebar" rel='tooltip'>&nbsp;</a></i>
                                 <li>
                                     <a href="/">Dashboard</a> <span class="divider">/</span>
                                 </li>
@@ -102,22 +107,26 @@
                         </div>
                         <div class="block-content collapse in">
                             <div class="span3">
-                                <div class="chart" id="chartWiFi" data-percent="#SWFI#"><span id="WiFiChart">#SWFI# %</span></div>
+                                <div class="chart" id="chartWiFi" data-percent="#SWFI#"><span id="WiFiChart">#SWFI#
+                                        %</span></div>
                                 <div class="chart-bottom-heading"><span class="label label-info">WIFI</span>
                                 </div>
                             </div>
                             <div class="span3">
-                                <div class="chart" id="chartPMEM" data-percent="#PMEM#"><span id="PMEMChart">#PMEM# %</span></div>
+                                <div class="chart" id="chartPMEM" data-percent="#PMEM#"><span id="PMEMChart">#PMEM#
+                                        %</span></div>
                                 <div class="chart-bottom-heading"><span class="label label-info">FLASH Free</span>
                                 </div>
                             </div>
                             <div class="span3">
-                                <div class="chart" id="chartram" data-percent="#ram#"><span id="ramChart">#ram# %</span></div>
+                                <div class="chart" id="chartram" data-percent="#ram#"><span id="ramChart">#ram# %</span>
+                                </div>
                                 <div class="chart-bottom-heading"><span class="label label-info">RAM Free</span>
                                 </div>
                             </div>
                             <div class="span3">
-                                <div class="chart" id="chartcpu" data-percent="#cpu#"><span id="cpuChart">#cpu# °C</span></div>
+                                <div class="chart" id="chartcpu" data-percent="#cpu#"><span id="cpuChart">#cpu#
+                                        °C</span></div>
                                 <div class="chart-bottom-heading"><span class="label label-info">TEMP CPU</span>
                                 </div>
                             </div>
@@ -135,10 +144,13 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div><span class="label label-info">Estado:</span> <span id="WFEstatus">#WFEstatus#</span></div>
+
                                 <div><span class="label label-info">Red:</span> <span>#WFSSID#</span></div>
                                 <div><span class="label label-info">IP:</span> <span>#sysIP#</span></div>
-                                <div><span class="label label-info">RSSI:</span> <span id="WFDBM">#WFDBM# dBm</span></div>
-                                <div><span class="label label-info">Señal:</span> <span id="WFPRC">#WFPRC# %</span></div>
+                                <div><span class="label label-info">RSSI:</span> <span id="WFDBM">#WFDBM# dBm</span>
+                                </div>
+                                <div><span class="label label-info">Señal:</span> <span id="WFPRC">#WFPRC# %</span>
+                                </div>
                             </div>
                         </div>
                         <!-- /block -->
@@ -153,7 +165,8 @@
                             </div>
                             <div class="block-content collapse in">
                                 <div><span class="label label-info">Estado:</span> <span id="MQTTStatus">#MQTTStatus#</span></div>
-                                <div><span class="label label-info">Servidor:</span> <span id="MQTTBroker">#MQTTBroker#</span></div>
+                                <div><span class="label label-info">Servidor:</span> <span
+                                        id="MQTTBroker">#MQTTBroker#</span></div>
                                 <div><span class="label label-info">Usuario:</span> <span>#MQTTUser#</span></div>
                                 <div><span class="label label-info">Client ID:</span> <span>#MQTTID#</span></div>
                                 <br>
@@ -162,8 +175,8 @@
                         <!-- /block -->
                     </div>
                     <!-- /BLOQUE MQTT -->
-                    
-                <!-- /block 2 Sensores-->
+
+                    <!-- /block 2 Sensores-->
                 </div>
                 <div class="row-fluid">
                     <!-- BLOQUE WIFI -->
@@ -171,25 +184,35 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left"><i class=" icon-bell"></i> Alarma & Sensores</div>
+                                <div class="muted pull-left"><i class=" icon-bell"></i> Temperaturas & Ventilacion</div>
                             </div>
                             <div class="block-content collapse in">
-                                <div><span class="label label-info">Estado Led:</span> <span id="Led2Estado">#Led2Estado#</span> 
+                                <div><span class="label label-info">Estado Led:</span> <span
+                                        id="Led2Estado">#Led2Estado#</span>
+
+                                    <span> <a href=#></a>
+                                        <button="" onclick="prenderled2()"> <button
+                                                class="btn btn-success btn-mini">Activar</button>
+                                    </span> <span> <a href=#></a>
+                                        <button="" onclick="apagarled2()"> <button
+                                                class="btn btn-danger btn-mini">Desactivar</button>
+                                    </span>
+                                </div>
+
+
+
+                                <div><span class="label label-info">TemperaturaH1:</span> <span
+                                        id="TemperaturaH1">#TemperaturaH1#</span></div>
+                                <div><span class="label label-info">TemperaturaH2:</span> <span
+                                        id="TemperaturaH2">#TemperaturaH2#</span></div>
+                                <div><span class="label label-info">TemperaturaAmbiente:</span> <span
+                                        id="TemperaturaAmbiente">#TemperaturaAmbiente#</span></div>
+                                        <div><span class="label label-info">EstadoPuerto0:</span> <span
+                                            id="EstadoPuerto0">#EstadoPuerto0#</span></div>
+                                    <div><span class="label label-info">EstadoPuerto1:</span> <span
+                                            id="EstadoPuerto1">#EstadoPuerto1#</span></div>
                                     
-                                    
-                                <span> <a href=#></a><button="" onclick="prenderled2()">   <button class="btn btn-success btn-mini">Activar</button> </span> <span> <a href=#></a><button="" onclick="apagarled2()"> <button class="btn btn-danger btn-mini">Desactivar</button></span></div>
-                                    
-                           
-                                <div><span class="label label-info">RELAY1:</span> <span>#RELAY1#</span> <span> <input type='checkbox' id='drop-remove' > </span> </div>    .     
-                                   
-                            
-                                <div><span class="label label-info">Sensor 2:</span> <span>#sysIP#</span></div>
-                               
-                                    <input type='checkbox' id='drop-remove' /> <label for='drop-remove'>remove after drop</label>
-                                
-                                <div><span class="label label-info">RELAY1:</span> <span id="RELAY1">#RELAY1#</span></div>
-                                <div><span class="label label-info">Sensor 4:</span> <span id="WFPRC">#WFPRC# %</span></div>
-                                <div><span class="label label-info">Sensor 4:</span> <span id="PATHNAME">#pathname# %</span></div>
+                                        
                             </div>
                         </div>
                         <!-- /block -->
@@ -200,20 +223,78 @@
                         <!-- block -->
                         <div class="block">
                             <div class="navbar navbar-inner block-header">
-                                <div class="muted pull-left"><i class="icon-list-alt"></i> Historico Alarmas</div>
+                                <div class="muted pull-left"><i class="icon-list-alt"></i> Estado de Alarmas</div>
                             </div>
                             <div class="block-content collapse in">
-                                <div><span class="label label-info">Ultima Alarma:</span> <span id="MQTTStatus">#MQTTStatus#</span></div>
-                                <div><span class="label label-info">Servidor:</span> <span id="MQTTBroker">#MQTTBroker#</span></div>
-                                <div><span class="label label-info">Usuario:</span> <span>#MQTTUser#</span></div>
-                                <div><span class="label label-info">Client ID:</span> <span>#MQTTID#</span></div>
+                                <div><span class="label label-info">EstadoDeSistema:</span> <span
+                                        id="EstadoDeSistema">#EstadoDeSistema#</span></div>
+                                <div><span class="label label-info">AlarmaIntrusion:</span> <span
+                                        id="AlarmaIntrusion">#AlarmaIntrusion#</span></div>
+                                <div><span class="label label-info">AlarmaH1:</span> <span
+                                        id="AlarmaH1">#AlarmaH1#</span></div>
+                                <div><span class="label label-info">AlarmaH2:</span> <span
+                                        id="AlarmaH2">#AlarmaH2#</span></div>
+
+                                <div><span class="label label-info">EstadoPuerto2:</span> <span
+                                        id="EstadoPuerto2">#EstadoPuerto2#</span></div>
                                 <br>
+                            
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+                    <!-- /BLOQUE MQTT -->
+                </div>
+
+                <!-- /BLOQUE WIFI -->
+                <div class="row-fluid">
+                    <!-- BLOQUE WIFI -->
+                    <div class="span6">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"><i class="icon-list-alt"></i> Estado Tensiones</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div><span class="label label-info">TensionGeneral:</span> <span
+                                        id="TensionGeneral">#TensionGeneral#</span></div>
+                                <div><span class="label label-info">TensionH1:</span> <span
+                                        id="TensionH1">#TensionH1#</span></div>
+                                <div><span class="label label-info">TensionH2:</span> <span
+                                        id="TensionH2">#TensionH2#</span></div>
+                                <div><span class="label label-info">magnetismoInterno:</span> <span
+                                        id="magnetismoInterno">#magnetismoInterno#</span></div>
+
+                                
                             </div>
                         </div>
                         <!-- /block -->
                     </div>
                     <!-- /BLOQUE MQTT -->
 
+
+
+                    <div class="span6">
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left"><i class="icon-signal"></i> Estado Corrientes</div>
+                            </div>
+                            <div class="block-content collapse in">
+
+                                <div><span class="label label-info">Corriente1:</span> <span
+                                        id="Corriente1">#Corriente1#</span></div>
+                                <div><span class="label label-info">Corriente2:</span> <span
+                                        id="Corriente2">#Corriente2#</span></div>
+                                <div><span class="label label-info">Gas:</span> <span id="Gas">#Gas#</span></div>
+                                <br>
+                                
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>
+
+                    <!-- /BLOQUE Estado -->
 
 
                 </div>
@@ -228,54 +309,54 @@
     <script src="scripts.js"></script>
     <!--/Para Cambios en el PIE-->
     <script>
-        $(function() {
+        $(function () {
             // Easy pie charts
             $('.chart').easyPieChart({
                 easing: 'easeOutBounce',
-                animate: 1000,
+                animate: 100,
                 size: 150,
             });
         });
     </script>
 
     <script>
-        function prenderled2(){
+        function prenderled2() {
             $.ajax({
-         
-            url: "http://a3gustavotedeschi.ddns.net:84/Led2On",
-            type: "GET",
-            dataType: "json",
-            success: function(response) {
-                // Manejar la respuesta exitosa aquí
-            console.log(response);
-            },
-                error: function(xhr, status, error) {
+
+                url: "http://a3gustavotedeschi.ddns.net:84/Led2On",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    // Manejar la respuesta exitosa aquí
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
                     // Manejar errores aquí
                     console.log("Error: " + error);
+                }
+            });
         }
-        });
-        }
-       
+
     </script>
 
-<script>
-    function apagarled2(){
-        $.ajax({
-    url: "http://a3gustavotedeschi.ddns.net:84/Led2Off",
-    type: "GET",
-    dataType: "json",
-    success: function(response) {
-        // Manejar la respuesta exitosa aquí
-        console.log(response);
-    },
-    error: function(xhr, status, error) {
-        // Manejar errores aquí
-        console.log("Error: " + error);
-    }
-    });
-    }
-   
-</script>
+    <script>
+        function apagarled2() {
+            $.ajax({
+                url: "http://a3gustavotedeschi.ddns.net:84/Led2Off",
+                type: "GET",
+                dataType: "json",
+                success: function (response) {
+                    // Manejar la respuesta exitosa aquí
+                    console.log(response);
+                },
+                error: function (xhr, status, error) {
+                    // Manejar errores aquí
+                    console.log("Error: " + error);
+                }
+            });
+        }
+
+    </script>
 
 </body>
 

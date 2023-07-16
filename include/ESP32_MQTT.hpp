@@ -13,12 +13,13 @@ void callback(char *topic, byte *payload, unsigned int length){
     DynamicJsonDocument doc(1024);
 
     deserializeJson(doc, mensaje);
-
+    /*
     if (doc["RELAY1"] == "on"){
         digitalWrite(RELAY1, HIGH);
     }else if(doc["RELAY1"] == "off"){
         digitalWrite(RELAY1, LOW);
     }
+    */
     
     log("\nInfo: Topico -->" + str_topic);
     log("\nInfo: Mensaje -->" + mensaje);

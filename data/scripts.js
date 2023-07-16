@@ -18,7 +18,7 @@ $(function() {
     });
 });
 
-//WebSocket Conexión............ le agregue el puerto
+//WebSocket Conexión............ le agregue el puerto 84
 
 var connection = new WebSocket('ws://' + location.hostname + ':84' + '/ws', ['arduino']);
 
@@ -64,8 +64,25 @@ function processData(data) {
             let PMEMChart = document.getElementById('PMEMChart');
             let ramChart = document.getElementById('ramChart');
             let cpuChart = document.getElementById('cpuChart');
-            let Led2Estado = document.getElementById('Led2Estado');
-
+            let TemperaturaH1 = document.getElementById('TemperaturaH1');
+            let TemperaturaH2 = document.getElementById('TemperaturaH2');
+            let TemperaturaAmbiente = document.getElementById('TemperaturaAmbiente');
+            let TensionGeneral = document.getElementById('TensionGeneral');
+            let TensionH1 = document.getElementById('TensionH1');
+            let TensionH2 = document.getElementById('TensionH2');
+            let magnetismoInterno = document.getElementById('magnetismoInterno');
+            let EstadoDeSistema = document.getElementById('EstadoDeSistema');
+            let AlarmaIntrusion = document.getElementById('AlarmaIntrusion');
+            let AlarmaH1 = document.getElementById('AlarmaH1');
+            let AlarmaH2 = document.getElementById('AlarmaH2');
+            let EstadoPuerto0 = document.getElementById('EstadoPuerto0');
+            let EstadoPuerto1 = document.getElementById('EstadoPuerto1');
+            let EstadoPuerto2 = document.getElementById('EstadoPuerto2');
+            let Corriente1 = document.getElementById('Corriente1');
+            let Corriente2 = document.getElementById('Corriente2');
+            let Gas = document.getElementById('Gas');
+            
+        
             WFEstatus.innerHTML = json.WFEstatus;
             MQTTStatus.innerHTML = json.MQTTStatus;
             MQTTBroker.innerHTML = json.MQTTBroker;
@@ -75,7 +92,23 @@ function processData(data) {
             PMEMChart.innerHTML = json.PMEM + " %";
             ramChart.innerHTML = json.ram + " %";
             cpuChart.innerHTML = json.cpu + " °C";
-            Led2Estado.innerHTML = json.Led2Estado;
+            TemperaturaH1.innerHTML = json.TemperaturaH1;
+            TemperaturaH2.innerHTML = json.TemperaturaH2;
+            TemperaturaAmbiente.innerHTML = json.TemperaturaAmbiente;
+            TensionGeneral.innerHTML = json.TensionGeneral;
+            TensionH1.innerHTML = json.TensionH1;
+            TensionH2.innerHTML = json.TensionH2;
+            magnetismoInterno.innerHTML = json.magnetismoInterno;
+            EstadoDeSistema.innerHTML = json.EstadoDeSistema;
+            AlarmaIntrusion.innerHTML = json.AlarmaIntrusion;
+            AlarmaH1.innerHTML = json.AlarmaH1;
+            AlarmaH2.innerHTML = json.AlarmaH2;
+            EstadoPuerto0.innerHTML = json.EstadoPuerto0;
+            EstadoPuerto1.innerHTML = json.EstadoPuerto1;
+            EstadoPuerto2.innerHTML = json.EstadoPuerto2;
+            Corriente1.innerHTML = json.Corriente1;
+            Corriente2.innerHTML = json.Corriente2;
+            Gas.innerHTML = json.Gas;
 
             $(function() {
                 var chart = window.chart = $('#chartWiFi').data('easyPieChart');

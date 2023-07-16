@@ -11,7 +11,7 @@ void configReset(){
 
     /* ------------------- AP -------------------- */
     strlcpy(nameap, deviceID().c_str(), sizeof(nameap));
-    strlcpy(passwordap, "1142487174", sizeof(passwordap));
+    strlcpy(passwordap, "admin", sizeof(passwordap));
 }
 /**********************************************/
 void configResetMQTT(){

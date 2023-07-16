@@ -88,6 +88,37 @@ void setup() {
   /* Listo */
   log("\nInfo: Setup completado");
 
+  //**********************************
+  //****SET Puertos*******************
+  //**********************************
+  pinMode(Puerto0, OUTPUT);
+  pinMode(Puerto1, OUTPUT);
+  pinMode(Puerto2,OUTPUT);
+  
+  pinMode (PuertoCorriente1, INPUT);
+  pinMode (PuertoCorriente2, INPUT);
+  pinMode (PuertoGas, INPUT);
+  pinMode (PuertoTemperaturaH1, INPUT);
+  pinMode (PuertoTemperaturaH2, INPUT);
+  pinMode (PuertoTemperaturaAmbiente, INPUT);
+  
+  pinMode (PuertoTensionGeneral, INPUT);
+  pinMode (PuertoTensionH1, INPUT);
+  pinMode (PuertoTensionH2, INPUT);
+  
+  pinMode (PuertoAlarmaIntrusion, INPUT);
+  pinMode (PuertoAlarmaH1, INPUT);
+  pinMode (PuertoAlarmaH2, INPUT);
+
+  //************************************
+  //********Definion de funciones*******
+  //************************************
+  
+  EstadoDeSistema = 1;
+  AlarmaIntrusion = 1;
+  AlarmaH1 = 1;
+  AlarmaH2 = 1;
+  CalculoRO();
 }
 
 /************** Bucle Infinito ******************/
@@ -115,7 +146,7 @@ void loop() {
         // * Si el LED está apagado, enciéndalo y viceversa:
         ledState = not(ledState);
         // * configurar el LED con el ledState de la variable:
-        digitalWrite(MQTTLED, ledState);
+        //digitalWrite(MQTTLED, ledState);
       }
       long now = millis();
       //intenta conectarse a cada un minuto.
@@ -129,7 +160,7 @@ void loop() {
     }else{
       // Client connected
       client.loop();
-      digitalWrite(MQTTLED, LOW);
+      //digitalWrite(MQTTLED, LOW);
     }
 
     //Publicar segun el Tiempo MQTT el mensaje
@@ -155,5 +186,200 @@ void loop() {
     }
 
   } 
+
+   int C_RMS1_1;
+  Corriente1 = 0; //Corriente 1
+  Corriente2 = 0; //Corriente 2
+  Gas = 0; //Corriente 3
+  TemperaturaH1 = 0; //Temperatura 1
+  TemperaturaH2 = 0; //Temperatura 2
+  TemperaturaAmbiente = 0; //Temperatura Ambiente
+  TensionGeneral = 0; //Tension General
+  TensionH1 = 0; //Tension H1
+  TensionH2 = 0; //Tension H2
+
+  //*****************************
+  //***Medicion de Corriente*****
+  //*****************************
+
+  C_RMS1 = 0;
+  Serial.println ("Inicio toma de muestras");
+  for (int i = 0; i < 3000; i++) //10000
+  {
+
+    Corriente1 = analogRead(PuertoCorriente1);
+    //Corriente2 = analogRead(PuertoCorriente2);
+    
+    if (Corriente1 > 4095) // Corta serca de 1023 (corriente maxima del conversor hay que ver si existen corrientes picos mayores)
+    {
+
+      //digitalWrite(Puerto1, HIGH);
+    }
+    else
+    {
+      //digitalWrite(Puerto1, LOW);
+    }
+
+    Intencidad1 = (Corriente1 * (37.8786 / 2047)) - 37.8786; // OffsetCorriente1; //37.8786    -- 37.8786 / 2300)
+    //Intencidad2 = (Corriente2 * (37.8786 / 2047)) - 37.8786;
+    //Gas = Gas * (37.8786 / 2047)) - 37.8786;
+
+    C_RMS1 = C_RMS1 + pow(Intencidad1, 2);
+    //C_RMS2 = C_RMS2 + pow(Intencidad2, 2);
+   
+    //C_RMS3 = C_RMS3 + pow(Intencidad3, 2); Elimino para medir GAS
+
+    TemperaturaH1 = TemperaturaH1 + analogRead(PuertoTemperaturaH1);
+    //TemperaturaH2 = TemperaturaH2 + analogRead(PuertoTemperaturaH2);
+    //TemperaturaAmbiente = TemperaturaAmbiente; //+ analogRead(PuertoTemperaturaAmbiente);
+    TensionGeneral =TensionGeneral+analogRead (PuertoTensionGeneral);
+
+  }
+  Serial.println("Fin toma de muestras");
+  delay(3000);
+
+  TemperaturaH1 = TemperaturaH1/3000;
+  //TemperaturaH2 = TemperaturaH2/3000;
+  //TemperaturaAmbiente = TemperaturaAmbiente/3000;
+  C_RMS1 = C_RMS1 / 3000; //Calibrado 24/11/2020 con Goldstar DM7333.
+  //C_RMS2 = C_RMS2 / 3000;
+  //C_RMS3 = C_RMS3 / 3000;
+  
+  //C_Gas=RL*(4096-C_Gas)/(C_Gas*RO);
+  C_Gas=0;
+  for(int i =1;i<300;i++)
+    {
+      C_Gas=C_Gas + analogRead(PuertoGas);
+      delay(10);
+    }
+  C_Gas=C_Gas/300;
+
+  C_Gas=3.3*(C_Gas/4095);
+  Serial.println("Gas-Volt:");
+  Serial.println(C_Gas); 
+  C_Gas=RL*(5-C_Gas)/C_Gas;  //cabio 3.3 por 5 
+  Serial.println("RS:");
+  Serial.println(C_Gas); 
+  Serial.println("RO:");
+  Serial.println(RO); 
+  C_Gas=C_Gas/RO;
+
+  Serial.println("RS/RO:");
+  Serial.println(C_Gas); 
+
+  iPPM_LPG = 964.02*(pow(C_Gas,-2.101));
+  if (iPPM_LPG<=100)
+      iPPM_LPG=0;
+  if (iPPM_LPG>10000)
+      iPPM_LPG=22222;
+
+  
+
+  //iPPM_CO = MQGetGasPercentage(C_Gas/RO,GAS_CO);
+  //iPPM_Smoke = MQGetGasPercentage(C_Gas/RO,GAS_SMOKE);
+  
+
+
+
+
+  C_RMS1 = sqrt(C_RMS1)-0.60;
+  C_RMS1_1=100*C_RMS1;
+  Serial.print("C_RMS1 flota: ");
+  Serial.print(C_RMS1);
+  C_RMS1=int (C_RMS1);
+  Serial.print("  C_RMS1: ");
+  Serial.print(C_RMS1);
+  Serial.print("  C_RMS2: ");
+  Serial.print(C_RMS2);
+  Serial.print(" C_RMS3: ");
+  Serial.print(C_RMS3);
+  Serial.print(" C_GAS: ");
+  Serial.print(C_Gas);
+
+  Serial.print(" IPPM_LPG: ");
+  Serial.print(iPPM_LPG);
+
+  if (C_RMS1_1 < 150)
+  {
+    C_RMS1 = 0;
+    Serial.println("C_RMS1_1 < 150");
+  }
+  else
+  {
+    if (C_RMS1_1 >= 150 && C_RMS1_1 <= 500)
+    {
+      C_RMS1 = int((C_RMS1 *1.35));
+      Serial.println("C_RMS1 >= 1 && C_RMS1 <= 6");
+    }
+    else
+    {
+      C_RMS1 = int ((C_RMS1*1.10)+0.5);   // *1.3
+      Serial.println("C_RMS1 = C_RMS1");
+    }
+  }
+
+  Serial.println(C_RMS1);
+  //***************************************
+  //*******Fin Medion de Corriente*********
+  //***************************************
+
+  //***************************************
+  //**********Medicion de temperatura******
+  //***************************************
+
+
+  //TemperaturaH1 = TemperaturaH1 / 10000;
+  TemperaturaH1 = (TemperaturaH1 - 2763) * (-0.0184) + 25;
+  //TemperaturaH2 = TemperaturaH2 / 10000;
+  TemperaturaH2 = (TemperaturaH2 - 2763) * (-0.0184) + 25;
+  //TemperaturaAmbiente = TemperaturaAmbiente / 10000;
+  TemperaturaAmbiente = (TemperaturaAmbiente - 2763) * (-0.0184) + 25;
+  
+  TensionGeneral = TensionGeneral / 21000;//34900;
+  TensionGeneral = (TensionGeneral*1.1515)-56.5;
+  TensionGeneral=int(TensionGeneral);
+  
+  //TensionGeneral = 221.9; //Borrar
+  //TensionH1 = TensionH1 / 10000;
+  TensionH1 = 0;  //Borrar
+  //TensionH2 = TensionH2 / 10000;
+  TensionH2 = 0;    //Borrar
+  magnetismoInterno = hallRead();
+
+
+
+  if (TemperaturaH1 > 60)
+  { digitalWrite(Puerto0, HIGH);
+    EstadoPuerto0 = 1;
+  }
+  else
+  { digitalWrite(Puerto0, LOW);
+    EstadoPuerto0 = 0;
+  }
+
+  AlarmaIntrusion=digitalRead(PuertoAlarmaIntrusion);
+  AlarmaH1=digitalRead(PuertoAlarmaH1);
+  AlarmaH2=digitalRead(PuertoAlarmaH2);
+  Serial.print("AlarmaIntrusion: ");
+  Serial.print(AlarmaIntrusion);
+  Serial.print("  AlarmaAlarmaH1: ");
+  Serial.println(AlarmaH1);
+  Serial.print("  AlarmaH2: ");
+  Serial.print(AlarmaH2);
+  Serial.print("  EstadoPuerto0: ");
+  Serial.print(EstadoPuerto0);
+  Serial.print("  EstadoPuerto1: ");
+  Serial.println(EstadoPuerto1);
+  Serial.print("  EstadoPuerto2: ");
+  Serial.println(EstadoPuerto2);
+  Serial.print(" Tensinon General: ");
+  Serial.println(TensionGeneral);
+  Serial.println (String(TensionGeneral));
+
+
+    /* ***********************************************************
+    **** Reviso tiempo con millisecons y disparo si paso un minuto
+    ***************************************************************
+    */
 
 }
