@@ -16,6 +16,7 @@ boolean configRead(){
         /* ------------------- AP -------------------- */
         strlcpy(nameap, jsonConfig["nameap"] | "", sizeof(nameap));
         strlcpy(passwordap, jsonConfig["passwordap"] | "", sizeof(passwordap));
+ 
         file.close();
         log("\nInfo: Lectura correcta configuración general");
         return true;
@@ -51,3 +52,5 @@ boolean configReadMQTT(){
 }
 /**********************************************/
 
+
+/**********************************************/

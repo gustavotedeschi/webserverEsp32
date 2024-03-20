@@ -22,6 +22,15 @@
 #define Puerto1 22 // Salida FAN2
 #define Puerto2 21
 
+#if !defined(PZEM_RX_PIN) && !defined(PZEM_TX_PIN)
+#define PZEM_RX_PIN 16
+#define PZEM_TX_PIN 17
+#endif
+
+#if !defined(PZEM_SERIAL)
+#define PZEM_SERIAL Serial2
+#endif
+
 /*
 #define MQTTLED 32
  GPIO LED2
@@ -112,9 +121,9 @@ float TemperaturaH2;       // Temperatura 2
 float TemperaturaAmbiente; // Temperatura Ambiente
 float TensionGeneral;      // Tension General
 char TensionGeneralC[10];
-float TensionH1;           // Tension H1
-float TensionH2;           // Tension H2
-float magnetismoInterno;   // Magnetismo del ESP32
+float TensionH1;         // Tension H1
+float TensionH2;         // Tension H2
+float magnetismoInterno; // Magnetismo del ESP32
 int EstadoDeSistema;
 int AlarmaIntrusion;
 int AlarmaH1;
@@ -147,3 +156,40 @@ int GAS_H = 3;
 long iPPM_LPG;
 long iPPM_CO;
 long iPPM_Smoke;
+
+// Read the data from the sensor
+float voltage1;
+float voltage1Max;
+float voltage1Min;
+
+float current1;
+float current1Max;
+float current1Min;
+
+float power1;
+float power1Max;
+float power1Min;
+
+float energy1;
+float energy1Max;
+float energy1Min;
+
+float frequency1;
+float frequency1Max;
+float frequency1Min;
+
+float pf1;
+float pf1Max;
+float pf1Min;
+
+// Reloj
+unsigned long tiempoAnterior = 0;
+int horas;
+int minutos;
+int segundos;
+int ano =0;
+int dia = 0;
+int mes = 0;
+
+
+boolean NTP = false;

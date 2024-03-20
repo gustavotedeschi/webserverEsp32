@@ -9,8 +9,6 @@ void configWiFi(){
     
     /************ CLIENTE *******************/
 
-
-   
     Serial.println(ssid);
     Serial.println(pw);
     WiFi.begin(ssid, pw);

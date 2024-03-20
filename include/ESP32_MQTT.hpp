@@ -26,7 +26,6 @@ void callback(char *topic, byte *payload, unsigned int length){
     serializeJsonPretty(doc, Serial);
     log("\n");  
 
-
 }
   
 /**********************************************/
